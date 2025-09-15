@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: tekken-mentor-api
+    env: node
+    plan: starter
+    rootDir: apps/api
+    buildCommand: npm ci
+    startCommand: node index.js
+    autoDeploy: true
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: WS_PATH
+        value: /ws
+      - key: CORS_ORIGINS
+        value: https://tekkenmentor.com
+      - key: JWT_SECRET
+        generateValue: true
+databases:
+  - name: tm-db
+    databaseName: tekken_mentor
+    plan: starter
