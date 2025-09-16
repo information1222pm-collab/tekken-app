@@ -2,13 +2,13 @@
   "name": "tekken-api",
   "version": "1.0.0",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "migrate": "node migrate.js"
   },
-  "engines": {
-    "node": "20.x"
-  },
+  "engines": { "node": "20.x" },
   "dependencies": {
     "cors": "2.8.5",
-    "express": "4.19.2"
+    "express": "4.19.2",
+    "pg": "8.11.5"
   }
 }
