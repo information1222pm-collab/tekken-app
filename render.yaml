@@ -19,7 +19,21 @@ services:
         value: https://tekkenmentor.com
       - key: JWT_SECRET
         generateValue: true
-databases:
-  - name: tm-db
-    databaseName: tekken_mentor
+    databases:
+      - name: tm-db
+        databaseName: tekken_mentor
+        plan: starter
+
+  - type: web
+    name: tekken-mentor-web
+    env: node
     plan: starter
+    rootDir: apps/web
+    buildCommand: npm ci && npm run build
+    startCommand: npm run preview
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 4173
