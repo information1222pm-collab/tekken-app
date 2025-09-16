@@ -13,24 +13,11 @@ app.use(cors({
   }
 }));
 
-// In-memory mock data (resets on deploy). Replace with DB later.
+app.get("/healthz", (_req, res) => res.status(200).json({ ok: true }));
+
+// simple in-memory posts
 const posts = [];
-
-app.get("/healthz", (req, res) => res.status(200).json({ ok: true }));
-
-app.post("/auth/signup", (req, res) => {
-  // Mock signup: immediately returns a fake token. Replace later.
-  const { email } = req.body || {};
-  if (!email) return res.status(400).json({ error: "email required" });
-  return res.json({ id: 1, token: "demo-token" });
-});
-
-app.post("/auth/login", (req, res) => {
-  return res.json({ token: "demo-token" });
-});
-
-app.get("/community/posts", (req, res) => res.json(posts));
-
+app.get("/community/posts", (_req, res) => res.json(posts));
 app.post("/community/posts", (req, res) => {
   const { title, body } = req.body || {};
   if (!title) return res.status(400).json({ error: "title required" });
@@ -39,4 +26,4 @@ app.post("/community/posts", (req, res) => {
   res.json(p);
 });
 
-app.listen(PORT, () => console.log(`API on :${PORT}`));
+app.listen(PORT, () => console.log(`API listening on :${PORT}`));
